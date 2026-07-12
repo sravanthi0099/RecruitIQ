@@ -87,16 +87,16 @@ app.add_middleware(SlowAPIMiddleware)
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=settings.cors_origins_list,
     allow_credentials=settings.CORS_CREDENTIALS,
-    allow_methods=settings.CORS_METHODS,
-    allow_headers=settings.CORS_HEADERS,
+    allow_methods=settings.cors_methods_list,
+    allow_headers=settings.cors_headers_list,
 )
 
 # Trusted host middleware
 app.add_middleware(
     TrustedHostMiddleware,
-    allowed_hosts=settings.ALLOWED_HOSTS,
+    allowed_hosts=settings.allowed_hosts_list,
 )
 
 # Add exception handler
@@ -152,7 +152,7 @@ async def config():
         "environment": settings.ENVIRONMENT,
         "debug": settings.DEBUG,
         "database_url": settings.DATABASE_URL.split("://")[0] + "://***",
-        "cors_origins": settings.CORS_ORIGINS,
+        "cors_origins": settings.cors_origins_list,
     }
 
 
